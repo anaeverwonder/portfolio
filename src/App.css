@@ -838,6 +838,93 @@ a {
 
 /* --- 2. RESPONSIVE UNTUK LAYAR HP / MOBILE (max-width: 768px) --- */
 @media screen and (max-width: 768px) {
+
+  /* ==========================================================================
+     [PAGE] - ILLUSTRATION RESPONSIVE FIX
+     ========================================================================== */
+
+  /* Fix Header Judul yang Bocor */
+  .illustration-header {
+    padding: 40px 16px 20px 16px; /* Beri ruang bernapas */
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Buat ke tengah di HP biar proporsional */
+  }
+
+  .illustration-header h1 {
+    display: flex;
+    flex-wrap: wrap;       /* KUNCI: Biar kalau gak muat, hurufnya otomatis turun kebawah, gak maksa keluar layar */
+    justify-content: center;
+    gap: 4px;              /* Jarak antar huruf terpisah */
+    font-size: 2.2rem;     /* Ukuran font ideal untuk HP */
+    letter-spacing: normal;/* Reset letter spacing bawaan */
+    width: 100%;
+  }
+
+  .illustration-header h1 .char {
+    position: static !important; /* Reset jika ada positioning kaku koordinat desktop */
+    transform: none !important;
+  }
+
+  /* Fix Gallery Section 1 (Masonry Grid 1-10) */
+  .section-grid-atas {
+    padding: 0 16px;
+  }
+
+  .seamless-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Ubah dari 5 kolom jadi 2 kolom saja di HP */
+    gap: 12px !important;
+  }
+
+  .seamless-column {
+    display: contents !important; /* Biar flex-column bawaan desktop luntur dan ngikut aturan Grid baru */
+  }
+
+  /* Fix Gallery Section 2 (Grid Bawah 11-19) */
+  .section-grid-bawah {
+    padding: 0 16px;
+    margin-top: 24px;
+  }
+
+  .spaced-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Samakan jadi 2 kolom biar konsisten */
+    gap: 12px !important;
+  }
+
+  /* Optimalisasi Image Card di HP */
+  .gallery-card {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important; /* Di HP paling aman dipaksa kotak/square biar estetik seperti feed Instagram */
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Untuk gambar dengan ratio khusus (misal 1-3), biarkan dia proporsional atau menutup card */
+  .gallery-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* KUNCI: Gambar gak bakal gepeng, otomatis ke-crop rapi di tengah */
+  }
+
+  /* Fix Modal Lightbox pas di-klik di HP */
+  .modal-wrapper {
+    width: 90% !important;
+    max-width: 400px;
+    margin: auto;
+  }
+
+  .modal-content {
+    flex-direction: column;
+  }
+
+  .modal-img-full {
+    max-height: 50vh !important;
+    object-fit: contain;
+  }
   
   /* [HOME PAGE] - HERO SECTION */
   .hero {
