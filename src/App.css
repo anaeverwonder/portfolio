@@ -1,0 +1,810 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* DIUBAH: Ganti dari #f3f3f3 ke #ffffff biar seluruh layar monitor lo full putih polos tanpa sekat */
+  background: #ffffff; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+  /* Pastikan di sini TIDAK ADA border-left, border-right, atau outline apa pun */
+}
+
+/* =====================
+    HEADER
+===================== */
+
+.hero {
+  padding-top: 80px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  letter-spacing: 1em;
+}
+
+.real-name {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.9em;
+}
+
+.role {
+  margin-top: 120px;
+  margin-left: 16vw;
+  text-align: left;
+  letter-spacing: 0.8em;
+  font-size: 0.8rem;
+}
+
+/* =====================
+    WORKS
+===================== */
+
+.works-section {
+  margin-top: 120px;
+  width: 100%;
+}
+
+.works-section h2 {
+  text-align: right;
+  margin-bottom: 60px;
+  margin-right: 15vw;
+  letter-spacing: 0.8em;
+}
+
+.works-grid {
+  display: flex;
+  justify-content: center; /* KUNCI: Biar 3 kotak ini tetep ngumpul di tengah monitor */
+  gap: 12px;             /* Jarak antar kotak */
+  padding: 0 40px;
+  width: 100%;
+}
+
+.work-card {
+  position: relative;
+  overflow: hidden;      /* KUNCI: Biar GIF/Foto lo kepotong rapi di dalem kotak */
+  width: 420px;          /* BALIK KE SEMULA: Ukuran kotak tetep fix di tengah */
+  height: 700px;
+  background-color: #000; /* Warna dasar kotak kalau GIF/gambar belum ke-load */
+  
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 24px;
+  
+  /* Efek Transisi sewaktu di-hover (Scale up / Menonjol) */
+  transition: transform 0.5s ease-out, z-index 0.5s ease-out, box-shadow 0.5s ease-out;
+  z-index: 1;
+}
+
+/* Efek Pas Kotak di-Hover (Nonjol ke depan) */
+.work-card:hover {
+  transform: scale(1.03); /* Menjol ke depan merata */
+  z-index: 10;            /* Biar numpang di atas kotak sebelahnya */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Bayangan estetik pas dihighlight */
+}
+
+/* Sizing & Efek Grayscale untuk Gambar/GIF lo */
+.card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* Biar gambar/GIF otomatis nge-pres rapi dan gak gepeng */
+  
+  /* Default: HITAM PUTIH (Grayscale) */
+  filter: grayscale(100%);
+  transition: filter 0.5s ease-out;
+  z-index: 1;
+}
+
+/* Hover: Gambar/GIF otomatis BERWARNA */
+.work-card:hover .card-img {
+  filter: grayscale(0%);
+}
+
+/* Overlay tipis biar teks putih selalu kebaca kontras */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  transition: background-color 0.5s ease-out;
+  z-index: 2;
+}
+
+.work-card:hover .card-overlay {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Teks Vertikal di dalam Kotak */
+.work-card span {
+  color: white;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.6em;
+  font-size: 1rem;
+  font-weight: bold;
+  
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* =====================
+   BRANDING PAGE
+===================== */
+
+.branding-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Section 1: Text Stacking Hero */
+.branding-hero {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+}
+
+/* KUNCI: Set semua baris teks biar punya animasi 'appearStep' selama 4 detik dan ngeloop */
+.text-stack span, .text-stack h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  
+  opacity: 0; /* Awalnya gak kelihatan sebelum animasi jalan */
+  animation: appearStep 4s infinite ease-in-out;
+}
+
+.stack-light { color: #e5e5e5; font-size: 4rem; font-weight: 300; }
+.stack-light-2 { color: #cccccc; font-size: 4.5rem; font-weight: 400; }
+.stack-medium { color: #888888; font-size: 5rem; font-weight: 500; }
+.stack-bold { color: #000000; font-size: 5.5rem; font-weight: 900; margin: 10px 0; }
+
+/* KUNCI UTAMA: Kasih jeda delay biar munculnya berurutan satu-satu */
+.text-stack .line-1 { animation-delay: 0.1s; }
+.text-stack .line-2 { animation-delay: 0.3s; }
+.text-stack .line-3 { animation-delay: 0.5s; }
+.text-stack .line-4 { animation-delay: 0.7s; } /* Teks utama (Bold) muncul pas tengah */
+.text-stack .line-5 { animation-delay: 0.9s; }
+.text-stack .line-6 { animation-delay: 1.1s; }
+.text-stack .line-7 { animation-delay: 1.3s; }
+
+/* LOGIKAL ANIMASI KEYFRAMES */
+@keyframes appearStep {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  15%, 85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Section 2: Banner Hitam */
+.brand-intro-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-meta {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #555555;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.brand-black-banner {
+  width: 100%;
+  height: 400px;
+  background-color: #000000;
+}
+
+/* Section 3: Jadoel Title */
+.brand-title-section {
+  padding: 120px 40px;
+  text-align: left;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand-subtitle {
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  color: #000000;
+  font-weight: bold;
+}
+
+.brand-main-title {
+  font-size: 5.5rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  margin-top: 20px;
+  color: #3d1c16; /* Meniru warna coklat gelap khas jadoel di wireframe */
+}
+
+/* Section 4: Logo Grid split 65/35 */
+.logo-grid-section {
+  display: flex;
+  width: 100%;
+  height: 500px;
+}
+
+.logo-left-box {
+  flex: 6.5;
+  background-color: #e0e0e0; /* Abu-abu terang */
+}
+
+.logo-right-box {
+  flex: 3.5;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Section 5: Transformation Banner */
+.transformation-section {
+  width: 100%;
+  height: 450px;
+  background-color: #a6a6a6; /* Abu-abu medium */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Section 6: Color & Collaterals Split 30/70 */
+.collaterals-section {
+  display: flex;
+  width: 100%;
+  height: 600px;
+}
+
+.color-scheme-box {
+  flex: 3;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.3em;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.collaterals-right-box {
+  flex: 7;
+  background-color: #dedede;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Section 7: Showcase */
+.showcase-section {
+  width: 100%;
+  height: 550px;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* Section 8: ETC */
+.etc-section {
+  width: 100%;
+  padding: 150px 0;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-weight: bold;
+  letter-spacing: 0.5em;
+  font-size: 1.1rem;
+}
+
+/* ===================================================
+   LAYOUT SECTION 1: SEAMLESS RApat 1-10 (FIXED)
+=================================================== */
+.section-grid-atas {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 120px; /* Jarak aman sebelum masuk grid bawah */
+}
+
+.seamless-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 Kolom tiang horizontal sejajar */
+  gap: 0; /* Rapat total tanpa sela */
+}
+
+.seamless-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Rapat total ke arah bawah */
+}
+
+/* ===================================================
+   LAYOUT SECTION 2: SPACED GRID 11-19 (GAYA KOTAK BERJARAK)
+=================================================== */
+.section-grid-bawah {
+  width: 100%;
+  padding: 0 8%; /* White space samping layar monitor */
+  box-sizing: border-box;
+  margin-bottom: 160px;
+}
+
+.spaced-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Membagi kotak jadi 3 kolom lapang */
+  gap: 50px; /* Jarak sela antar kotak bawah */
+}
+
+/* ===================================================
+   CORE CSS MASKING RATIO (FIXED SEAMLESS FILL GAP)
+=================================================== */
+.gallery-card {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Ganti ke flex biar sinkron fill gap */
+  flex-direction: column;
+  flex-grow: 1; /* KUNCI UTAMA: Memaksa card melar ke bawah ngisi sela kosong */
+  background-color: #ffffff;
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
+  z-index: 1;
+}
+
+/* Mengunci Aspek Rasio Sesuai Komposisi Blueprint */
+.ratio-1-1 { aspect-ratio: 1 / 1; }
+.ratio-1-2 { aspect-ratio: 1 / 2; }
+.ratio-1-3 { aspect-ratio: 1 / 3; }
+.ratio-2-1 { aspect-ratio: 2 / 1; }
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Motong gambar otomatis pas di dalem frame */
+  flex-grow: 1;      /* Memastikan gambar ditarik penuh tanpa menyisakan putih */
+  transition: transform 0.7s ease;
+}
+
+/* ===================================================
+   UTILITY UNTUK ATUR POSISI POTONGAN GAMBAR
+=================================================== */
+.pos-right { object-position: right center; }
+.pos-left { object-position: left center; }
+.pos-top { object-position: center top; }
+.pos-bottom { object-position: center bottom; }
+
+/* ===================================================
+   PREMIUM HOVER POP-OUT INTERACTION
+=================================================== */
+.gallery-card:hover {
+  transform: scale(1.05);
+  z-index: 99;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-card:hover .gallery-img {
+  transform: scale(1.03);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.gallery-card:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span { color: #fff; border: 1px solid #fff; padding: 6px 14px; font-size: 0.75rem; letter-spacing: 0.2em; }
+
+/* ===================================================
+   MODAL LIGHTBOX FIX: EFFECT FADE BLACK + BLUR BACKGROUND
+=================================================== */
+.modal-lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+/* Backdrop Gelap + Efek Blur Sinematik Belakang Layar */
+.modal-backdrop-close {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fade Hitam */
+  backdrop-filter: blur(12px);          /* KUNCI BLUR HALUS LO COK! */
+  border: none;
+  cursor: zoom-out;
+}
+
+.modal-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tombol Close Silang Gede Kanan Atas */
+.modal-close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.modal-close:hover { transform: scale(1.2); }
+
+.modal-content {
+  position: relative; /* Kunci biar box deskripsi bisa melayang absolute melingkari gambar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Gambar Full Muncul Proporsional */
+.modal-img-full {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  background-color: transparent;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+/* BOX DESKRIPSI OVERLAP (Sesuai Coretan Gambar edited-image.png) */
+.modal-desc-card {
+  position: absolute;
+  right: -80px; /* Memaksa kotak keluar dan overlap di sisi kanan gambar */
+  bottom: 10%;  /* Posisi vertikal agak ke bawah biar estetik */
+  width: 260px;
+  background: rgba(20, 20, 20, 0.85); /* Hitam transparan premium */
+  backdrop-filter: blur(8px);        /* Efek blur kaca tipis di dalam kotak text */
+  padding: 20px;
+  border-radius: 4px;
+  border-left: 3px solid #ffffff;    /* Aksen garis minimalis di kiri */
+  color: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  
+  /* KUNCI UTAMA ANIMASI FADE IN + DELAY SEPERTI REQUEST LO */
+  opacity: 0;
+  transform: translateX(20px); /* Awalnya geser ke kanan dikit */
+  animation: fadeInDesc 0.6s forwards ease-out;
+  animation-delay: 0.5s; /* Jeda 0.5 detik setelah gambar muncul baru text-nya masuk */
+}
+
+/* Detail Typo Text Kecil Minimalis */
+.modal-desc-card h4 {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.modal-desc-card p {
+  font-size: 0.7rem;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: #cccccc;
+}
+
+/* LOGIKA ANIMASI FADE IN GESER */
+@keyframes fadeInDesc {
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Kembali ke posisi asli nempel overlap */
+  }
+}
+
+/* Responsive: Kalau layar hp/kekecilan, deskripsinya turun ke bawah gambar biar gak kepotong */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column;
+  }
+  .modal-desc-card {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 90vw;
+    transform: translateY(20px);
+    animation: fadeInDescMobile 0.6s forwards ease-out;
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes fadeInDescMobile {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ===================================================
+   FLOATING BACK BUTTON & NAVIGATION
+=================================================== */
+.back-nav-container {
+  position: fixed;
+  bottom: 50px; left: 50px;
+  width: auto; height: auto;
+  display: flex;
+  align-items: center; 
+  z-index: 9999;
+  pointer-events: none; 
+}
+
+.back-nav-fade {
+  position: absolute;
+  bottom: -50px; left: -50px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle at 50px 550px, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.back-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px; height: 110px;
+  background-color: #000000; 
+  border-radius: 50%;  
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  pointer-events: auto; 
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+}
+
+.back-bubble span {
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.65rem;   
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 10px;
+  line-height: 1.3;
+}
+
+.back-bubble:hover { transform: scale(1.1) translate(5px, -5px); background-color: #222222; }
+
+/* ===================================================
+   FIX ANIMASI HEADER ILLUSTRATION PER HURUF
+=================================================== */
+.illustration-header { padding: 100px 80px 60px 0; display: flex; justify-content: flex-end; }
+.illustration-header h1 { font-family: Arial, Helvetica, sans-serif; font-size: 3rem; font-weight: 900; letter-spacing: 0.5em; color: #000000; margin: 0; display: flex; }
+.illustration-header h1 span.char { display: inline-block; opacity: 0; transform: translateY(10px); animation: waveSequence 5s infinite ease-in-out; }
+.illustration-header h1 span.c1  { animation-delay: 0.1s; }
+.illustration-header h1 span.c2  { animation-delay: 0.2s; }
+.illustration-header h1 span.c3  { animation-delay: 0.3s; }
+.illustration-header h1 span.c4  { animation-delay: 0.4s; }
+.illustration-header h1 span.c5  { animation-delay: 0.5s; }
+.illustration-header h1 span.c6  { animation-delay: 0.6s; }
+.illustration-header h1 span.c7  { animation-delay: 0.7s; }
+.illustration-header h1 span.c8  { animation-delay: 0.8s; }
+.illustration-header h1 span.c9  { animation-delay: 0.9s; }
+.illustration-header h1 span.c10 { animation-delay: 1.0s; }
+.illustration-header h1 span.c11 { animation-delay: 1.1s; }
+.illustration-header h1 span.c12 { animation-delay: 1.2s; }
+
+@keyframes waveSequence {
+  0% { opacity: 0; transform: translateY(15px); }
+  25%, 55% { opacity: 1; transform: translateY(0); }
+  75%, 100% { opacity: 0; transform: translateY(-15px); }
+}
+
+/* =====================
+   MOTION
+===================== */
+
+.motion-page { padding: 100px 8%; }
+
+.motion-title {
+  font-size: 1.5rem;
+  letter-spacing: 0.8em;
+  margin-bottom: 80px;
+}
+
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.video-card {
+  position: relative;
+  width: 100%;
+  background: #000; /* Background hitam biar letterbox nyatu */
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* KUNCI: Pakai aspect-ratio biar gak perlu set height manual */
+.video-card.wide, .video-card.wide-black, .video-card.full { 
+  grid-column: span 3; 
+  aspect-ratio: 16 / 9; 
+}
+
+.video-card.tall { 
+  aspect-ratio: 9 / 16; 
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Video utuh, gak kepotong */
+  display: block;
+  transition: outline 0.3s ease;
+}
+
+/* Overlay Hover */
+.video-info-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  padding: 15px;
+  border-radius: 4px;
+  color: white;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease-out;
+  z-index: 10;
+}
+
+.video-card:hover .video-info-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.video-info-overlay h4 { font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 5px; color: #ffffff; }
+.video-info-overlay p { font-size: 0.7rem; color: #eeeeee; }
+
+/* Indikator Active Audio */
+.video-active {
+  outline: 3px solid #ffffff !important;
+  outline-offset: -3px;
+}
+
+/* =====================
+    FOOTER
+===================== */
+
+.footer {
+  margin-top: 220px;
+  margin-bottom: 80px;
+  
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    /* Ngunci kontainer utama biar pas di tengah monitor */
+  gap: 40px;              /* Jarak vertikal dari CONTACT: ke isi sosmed */
+  
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.footer-title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.3em;
+  color: #888888;
+  text-align: center;     /* Paksa teks judul rata tengah */
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Biar sejajar dari baris pertama teks */
+  gap: 120px;              
+  width: 100%;            
+}
+
+/* KUNCI UTAMA: Setiap blok sosmed dipaksa punya alignment rata tengah */
+.footer-links > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* Bikin Judul Sosmed ama Username lurus segaris */
+  text-align: center;     /* Mastiin text multi-line tetep rapi di tengah */
+  flex: 1;                /* Bagi ruang space kolomnya sama rata */
+  max-width: 200px;       /* Ngebatesin lebar kolom biar gak terlalu mencar jauh */
+}
+
+.footer-sub {
+  display: inline-block;
+  margin-top: 8px;        /* Kasih jarak tipis antara judul sosmed ama usernamenya */
+  text-transform: none;   
+  color: #000000;
+}
