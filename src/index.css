@@ -50,12 +50,14 @@
   }
 }
 
+/* ... (Isi :root dan prefer-color-scheme lo di atas biarkan tetap sama) ... */
+
 body {
   margin: 0;
+  overflow-x: hidden; /* KUNCI UTAMA: Biar gak ada element yang bisa nge-push layar ke kanan (anti-scroll horizontal) */
 }
 
 #root {
-  /* DIUBAH: Ubah width jadi 100% biar lepas dari batasan 1126px */
   width: 100%;
   max-width: 100%;
   margin: 0;  
@@ -65,8 +67,7 @@ body {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
@@ -76,22 +77,29 @@ h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
-p {
-  margin: 0;
+
+/* KUNCI BREAKPOINT GLOBAL UNTUK TYPOGRAPHY */
+@media (max-width: 1024px) {
+  :root {
+    font-size: 15px; /* Perkecil base font sedikit di tablet */
+  }
+  h1 { font-size: 38px; margin: 20px 0; }
+  h2 { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 14px; /* Base font ideal untuk HP */
+  }
+  h1 { font-size: 28px; letter-spacing: -0.5px; }
 }
 
 code,

@@ -808,3 +808,140 @@ a {
   text-transform: none;   
   color: #000000;
 }
+
+/* ==========================================================================
+   MEDIA QUERIES FOR RESPONSIVE LAYOUT (HOME & GLOBAL)
+   ========================================================================== */
+
+/* --- 1. RESPONSIVE UNTUK LAYAR TABLET / LAPTOP KECIL (max-width: 1024px) --- */
+@media screen and (max-width: 1024px) {
+  .role {
+    margin-left: 8vw; /* Kurangi margin kiri yang tadinya kejauhan */
+    margin-top: 80px;
+  }
+
+  .works-section h2 {
+    margin-right: 8vw;
+    margin-bottom: 40px;
+  }
+
+  .works-grid {
+    padding: 0 24px;
+    gap: 16px;
+  }
+
+  .work-card {
+    width: 100%;     /* Ubah dari kaku 420px jadi responsif */
+    height: 550px;   /* Sesuaikan proporsi tinggi di tablet */
+  }
+}
+
+/* --- 2. RESPONSIVE UNTUK LAYAR HP / MOBILE (max-width: 768px) --- */
+@media screen and (max-width: 768px) {
+  
+  /* [HOME PAGE] - HERO SECTION */
+  .hero {
+    padding-top: 60px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;     /* Ciutkan font biar gak makan tempat */
+    letter-spacing: 0.3em; /* Perkecil letter-spacing raksasa 1em lo biar gak overfow */
+    text-indent: 0.3em;    /* Penyeimbang efek letter-spacing biar tetep center */
+  }
+
+  .real-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-indent: 0.4em;
+  }
+
+  .role {
+    margin-left: 0;
+    text-align: center;    /* Di HP mending rata tengah biar estetik minimalis */
+    margin-top: 60px;
+    letter-spacing: 0.4em;
+    text-indent: 0.4em;
+    font-size: 0.75rem;
+  }
+
+  /* [HOME PAGE] - WORKS GRID */
+  .works-section {
+    margin-top: 80px;
+  }
+
+  .works-section h2 {
+    text-align: center;   /* Rata tengah di HP */
+    margin-right: 0;
+    margin-bottom: 32px;
+    letter-spacing: 0.4em;
+    text-indent: 0.4em;
+    font-size: 1.2rem;
+  }
+
+  .works-grid {
+    flex-direction: column; /* UBAH DARI MENYAMPING JADI BERDERET KE BAWAH */
+    align-items: center;
+    padding: 0 24px;
+    gap: 24px;
+  }
+
+  .work-card {
+    width: 100%;
+    max-width: 380px;      /* Batasi lebar maksimal kartu di HP biar gak terlalu melar */
+    height: 480px;         /* Tinggi yang ideal untuk scroll vertical HP */
+    padding: 20px;
+  }
+
+  .work-card span {
+    writing-mode: horizontal-tb; /* Ubah teks vertikal jadi horizontal biar enak dibaca di HP */
+    transform: none;
+    letter-spacing: 0.3em;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* [GLOBAL FLOATING BACK BUTTON] */
+  .back-nav-container {
+    bottom: 24px;   /* Geser lebih rapat ke pojok bawah layar HP */
+    left: 24px;
+  }
+
+  .back-bubble {
+    width: 80px;    /* Ciutkan ukuran bubble biar gak mengganggu konten web */
+    height: 80px;
+  }
+
+  .back-bubble span {
+    font-size: 0.55rem;
+    letter-spacing: 0.05em;
+    padding: 0 4px;
+  }
+
+  .back-nav-fade {
+    width: 300px;   /* Perkecil shadow hitam di sudut */
+    height: 300px;
+    bottom: -24px;
+    left: -24px;
+  }
+
+  /* [GLOBAL FOOTER] */
+  .footer {
+    margin-top: 120px; /* Kurangi space kosong raksasa di HP */
+    margin-bottom: 60px;
+    gap: 24px;
+  }g
+
+  .footer-links {
+    flex-direction: column; /* SUSUN SOSMED KE BAWAH */
+    align-items: center;
+    gap: 32px; /* Jarak antar baris sosmed */
+  }
+
+  .footer-links > div {
+    max-width: 100%; /* Buat lebar penuh */
+  }
+}
